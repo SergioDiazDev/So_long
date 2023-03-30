@@ -1,12 +1,16 @@
-// -----------------------------------------------------------------------------
-// Codam Coding College, Amsterdam @ 2022-2023 by W2Wizard.
-// See README in the root project for more information.
-// -----------------------------------------------------------------------------
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
+/*   Updated: 2023/03/30 16:24:26 by sdiaz-ru         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "MLX42/include/MLX42/MLX42.h"
+#include "so_long.h"
 
 #define WIDTH 1024
 #define HEIGHT 1024
@@ -30,13 +34,16 @@ void ft_hook(mlx_key_data_t keydata, void *param)
 			image->instances[0].x += SIZE_BLOCK;
 	}
 
-int main()
+int main(int argc, char **argv)
 {
 	mlx_t* mlx;
 	mlx_image_t* background;
 	mlx_image_t* mina;
-	
 
+	if (argc != 2)
+		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
+	ft_read_map(argv[1]);
+	(void) argv;
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "so_long", false)))
 		return(puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
 	background = mlx_texture_to_image(mlx, mlx_load_png("assets/background.png"));
@@ -53,4 +60,20 @@ int main()
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
+}
+
+void	ft_read_map(char *name_map)
+{
+	int	size;
+	int	fd;
+
+	size = ft_strlen(name_map);
+	if (size)
+	{
+		if (ft_memcmp(&name_map[size - 4], ".ber", 4))
+			exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
+		fd = open(name_map, O_RDONLY);
+		printf("%s", get_next_line(fd));
+	}
+	exit(write(1, "[ERROR]Como has llegado aqui????", 33));
 }
