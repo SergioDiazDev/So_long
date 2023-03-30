@@ -33,12 +33,20 @@ void ft_hook(mlx_key_data_t keydata, void *param)
 int main()
 {
 	mlx_t* mlx;
+	mlx_image_t* background;
+	mlx_image_t* mina;
 	
 
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "so_long", false)))
 		return(puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	
+	background = mlx_texture_to_image(mlx, mlx_load_png("assets/background.png"));
+	mina = mlx_texture_to_image(mlx, mlx_load_png("assets/mina.png"));
 	image = mlx_texture_to_image(mlx, mlx_load_png("assets/prota.png"));
+	mlx_image_to_window(mlx, background, 0, 0);
+	mlx_image_to_window(mlx, background, 64, 0);
+	mlx_image_to_window(mlx, background, 0, 64);
+	mlx_image_to_window(mlx, background, 64, 64);
+	mlx_image_to_window(mlx, mina, 0, 0);
 	mlx_image_to_window(mlx, image, 0, 0);
 
 	mlx_key_hook(mlx, ft_hook, mlx);
