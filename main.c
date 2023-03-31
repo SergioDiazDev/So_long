@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 16:08:06 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:03:38 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-void	ft_read_map(t_so_long *game, char *name_map)
+void	ft_read_map(t_so_long *g, char *name_map)
 {
 	int		size;
 	char	*temp;
@@ -59,27 +59,27 @@ void	ft_read_map(t_so_long *game, char *name_map)
 	if (size)
 	{
 		if (ft_memcmp(&name_map[size - 4], ".ber", 4))
-			ft_exit_free(EXTENSION_NO_BER, game);
+			ft_exit_free(EXTENSION_NO_BER, g);
 		fd = open(name_map, O_RDONLY);
 		temp = get_next_line(fd);
 		size = ft_strlen(temp) - 1;
+		g->width = size;
 		while (temp)
 		{
-			if (size == game->height + 1)
-				ft_exit_free(MAPA_RECTANDULAR, game);
-			game->height++;
+			g->height++;
 			free(temp);
 			temp = get_next_line(fd);
+			if (ft_strlen(temp) - 1 != g->width && temp)
+				ft_exit_free(MAPA_NO_CORRECTO, g);
 		}
-		game->width = size;
-		if (game->height == game->width || game->height <= 1 || game->width <= 1)
-			ft_exit_free(MAPA_NO_CORRECTO, game);
+		if (g->height == g->width || g->height <= 2 || g->width <= 2)
+			ft_exit_free(MAPA_NO_CORRECTO, g);
 		free(temp);
 		close(fd);
-		game->map = ft_calloc(sizeof(char *), size);
+		g->map = ft_calloc(sizeof(char *), size);
 		fd = open(name_map, O_RDONLY);
 		while (size--)
-			game->map[size] = get_next_line(fd);
+			g->map[size] = get_next_line(fd);
 		close(fd);
 	}
 }
@@ -103,8 +103,6 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		mlx_terminate(game->mlx);
 		exit(write(1, "\n[ERROR]Durante la ejecucion\n\n", 31));
 	}
-	if (nb_error == MAPA_RECTANDULAR)
-		exit(write(1, "\n[ERROR]Mapa no rectangular.\n\n", 31));
 	if (nb_error == MAPA_NO_CORRECTO)
 		exit(write(1, "\n[ERROR]Mapa no correcto.\n\n", 28));
 }
