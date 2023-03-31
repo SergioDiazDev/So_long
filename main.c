@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 10:52:47 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:25:13 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_so_long *) param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(game->mlx);
+		ft_exit_free(1, game);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 		game->player->instances[0].y -= SIZE_BLOCK;
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 {
 	t_so_long	game;
 
+	atexit(ft_leaks);
 	if (argc != 2)
 		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
 	ft_read_map(&game, argv[1]);
@@ -47,14 +48,10 @@ int	main(int argc, char **argv)
 	game.mine = mlx_texture_to_image(game.mlx, mlx_load_png("img/mine.png"));
 	game.player = mlx_texture_to_image(game.mlx, mlx_load_png("img/main.png"));
 	mlx_image_to_window(game.mlx, game.bg, 0, 0);
-	mlx_image_to_window(game.mlx, game.bg, 64, 0);
-	mlx_image_to_window(game.mlx, game.bg, 0, 64);
-	mlx_image_to_window(game.mlx, game.bg, 64, 64);
 	mlx_image_to_window(game.mlx, game.mine, 0, 0);
 	mlx_image_to_window(game.mlx, game.player, 0, 0);
 	mlx_key_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
 
@@ -68,7 +65,7 @@ void	ft_read_map(t_so_long *game, char *name_map)
 	if (size)
 	{
 		if (ft_memcmp(&name_map[size - 4], ".ber", 4))
-			exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
+			ft_exit_free(-1, game);
 		fd = open(name_map, O_RDONLY);
 		size = 0;
 		temp = get_next_line(fd);
@@ -78,12 +75,34 @@ void	ft_read_map(t_so_long *game, char *name_map)
 			free(temp);
 			temp = get_next_line(fd);
 		}
+		free(temp);
 		close(fd);
 		game->map = ft_calloc(sizeof(char *), size);
+		free(game->map);
 		fd = open(name_map, O_RDONLY);
-		while (size--)
-			game->map[size] = get_next_line(fd);
+		// while (size--)
+		// 	game->map[size] = get_next_line(fd);
 		close(fd);
 	}
-	//exit(write(1, "[ERROR]Como has llegado aqui????", 33));
+}
+
+void	ft_exit_free(int nb_error, t_so_long *game)
+{
+	(void) game;
+	if (nb_error == -1)
+		exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
+	if (nb_error == 1)
+	{
+		mlx_delete_image(game->mlx, game->bg);
+		mlx_delete_image(game->mlx, game->mine);
+		mlx_delete_image(game->mlx, game->player);
+		mlx_close_window(game->mlx);
+		mlx_terminate(game->mlx);
+		exit(write(1, "\n[ERROR]Durante la ejecucion\n\n", 31));
+	}
+}
+
+void	ft_leaks(void)
+{
+	system("leaks so_long");
 }
