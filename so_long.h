@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 14:36:41 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:07:45 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include "MLX42/include/MLX42/MLX42.h"
 //open
 # include <fcntl.h>
+//Defines
+# define BLOCK 64
+# define EXTENSION_NO_BER -1
+# define FIN_DE_PROGRAMA	-2
+# define MAPA_RECTANDULAR -3
+# define MAPA_NO_CORRECTO -4
 
 //struct
 typedef struct s_so_long
