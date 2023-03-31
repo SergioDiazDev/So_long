@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:10:33 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 13:19:42 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:08:18 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	ft_init_so_long(t_so_long *game)
 {
-	game->height = 1024;
-	game->width = 1024;
-	game->mlx = mlx_init(game->width, game->height, "so_long", false);
+	game->mlx = mlx_init(game->width * 64, game->height * 64, "so_long", false);
 	if (!game->mlx)
-		ft_exit_free(-1, game);
+		exit(write(1, "\n[ERROR]: No se pudo crear MLX\n\n", 33));
 	game->t_bg = mlx_load_png("img/bg.png");
 	game->t_mine = mlx_load_png("img/mine.png");
 	game->t_player = mlx_load_png("img/player.png");
