@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 15:19:16 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:53:28 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 int	main(int argc, char **argv)
 {
 	t_so_long	game;
-
 	atexit(ft_leaks);
+
 	if (argc != 2)
 		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
 	game.height = 0;
@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(game.mlx, game.player, 0, 0);
 	mlx_key_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
+	ft_exit_free(-2, &game);
 	return (EXIT_SUCCESS);
 }
 
@@ -73,10 +74,11 @@ void	ft_read_map(t_so_long *game, char *name_map)
 			temp = get_next_line(fd);
 		}
 		game->width = size;
+		if (game->height == game->width || game->height <= 1 || game->width <= 1)
+			ft_exit_free(-4, game);
 		free(temp);
 		close(fd);
 		game->map = ft_calloc(sizeof(char *), size);
-		free(game->map);
 		fd = open(name_map, O_RDONLY);
 		while (size--)
 			game->map[size] = get_next_line(fd);
@@ -90,8 +92,13 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
 	if (nb_error == -3)
 		exit(write(1, "\n[ERROR]Mapa no rectangular.\n\n", 31));
+	if (nb_error == -4)
+		exit(write(1, "\n[ERROR]Mapa no correcto.\n\n", 28));
 	if (nb_error == -2)
 	{
+		//NO ESTOY LIBERANDO ESTO, PERO NO DA PROBLEMAS
+		// while (game->height)
+		// 	free(game->map[game->height]);
 		mlx_delete_texture(game->t_bg);
 		mlx_delete_texture(game->t_mine);
 		mlx_delete_texture(game->t_player);
