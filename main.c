@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 17:03:38 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:23:28 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	game.width = 0;
 	ft_read_map(&game, argv[1]);
 	ft_init_so_long(&game);
-	mlx_image_to_window(game.mlx, game.bg, 0, 0);
+	ft_pain_map(&game);
 	mlx_image_to_window(game.mlx, game.mine, 0, 0);
 	mlx_image_to_window(game.mlx, game.player, 0, 0);
 	mlx_key_hook(game.mlx, ft_hook, &game);
@@ -52,7 +52,6 @@ int	main(int argc, char **argv)
 void	ft_read_map(t_so_long *g, char *name_map)
 {
 	int		size;
-	char	*temp;
 	int		fd;
 
 	size = ft_strlen(name_map);
@@ -61,25 +60,27 @@ void	ft_read_map(t_so_long *g, char *name_map)
 		if (ft_memcmp(&name_map[size - 4], ".ber", 4))
 			ft_exit_free(EXTENSION_NO_BER, g);
 		fd = open(name_map, O_RDONLY);
-		temp = get_next_line(fd);
-		size = ft_strlen(temp) - 1;
+		g->temp = get_next_line(fd);
+		g->height++;
+		size = ft_strlen(g->temp) - 1;
 		g->width = size;
-		while (temp)
+		while (g->temp)
 		{
-			g->height++;
-			free(temp);
-			temp = get_next_line(fd);
-			if (ft_strlen(temp) - 1 != g->width && temp)
+			free(g->temp);
+			g->temp = get_next_line(fd);
+			if (ft_strlen(g->temp) - 1 != g->width && g->temp)
 				ft_exit_free(MAPA_NO_CORRECTO, g);
+			g->height++;
 		}
 		if (g->height == g->width || g->height <= 2 || g->width <= 2)
 			ft_exit_free(MAPA_NO_CORRECTO, g);
-		free(temp);
+		free(g->temp);
 		close(fd);
-		g->map = ft_calloc(sizeof(char *), size);
+		g->map = ft_calloc(sizeof(char *), g->height + 1);
 		fd = open(name_map, O_RDONLY);
-		while (size--)
-			g->map[size] = get_next_line(fd);
+		size = 0;
+		while (size != g->height + 1)
+			g->map[size++] = get_next_line(fd);
 		close(fd);
 	}
 }
@@ -101,7 +102,7 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		mlx_delete_image(game->mlx, game->player);
 		mlx_close_window(game->mlx);
 		mlx_terminate(game->mlx);
-		exit(write(1, "\n[ERROR]Durante la ejecucion\n\n", 31));
+		exit(write(1, "\n[FIN_DE_PROGRAMA]\n\n", 21));
 	}
 	if (nb_error == MAPA_NO_CORRECTO)
 		exit(write(1, "\n[ERROR]Mapa no correcto.\n\n", 28));
