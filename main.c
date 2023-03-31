@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 12:25:13 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:01:08 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,12 @@ int	main(int argc, char **argv)
 	(void) argv;
 	if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "so_long", false)))
 		return (puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	game.bg = mlx_texture_to_image(game.mlx, mlx_load_png("img/bg.png"));
-	game.mine = mlx_texture_to_image(game.mlx, mlx_load_png("img/mine.png"));
-	game.player = mlx_texture_to_image(game.mlx, mlx_load_png("img/main.png"));
+	game.t_bg = mlx_load_png("img/bg.png");
+	game.t_mine = mlx_load_png("img/mine.png");
+	game.t_player = mlx_load_png("img/player.png");
+	game.bg = mlx_texture_to_image(game.mlx, game.t_bg);
+	game.mine = mlx_texture_to_image(game.mlx, game.t_mine);
+	game.player = mlx_texture_to_image(game.mlx, game.t_player);
 	mlx_image_to_window(game.mlx, game.bg, 0, 0);
 	mlx_image_to_window(game.mlx, game.mine, 0, 0);
 	mlx_image_to_window(game.mlx, game.player, 0, 0);
@@ -88,12 +91,14 @@ void	ft_read_map(t_so_long *game, char *name_map)
 
 void	ft_exit_free(int nb_error, t_so_long *game)
 {
-	(void) game;
 	if (nb_error == -1)
 		exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
 	if (nb_error == 1)
 	{
 		mlx_delete_image(game->mlx, game->bg);
+		mlx_delete_texture(game->t_bg);
+		mlx_delete_texture(game->t_mine);
+		mlx_delete_texture(game->t_player);
 		mlx_delete_image(game->mlx, game->mine);
 		mlx_delete_image(game->mlx, game->player);
 		mlx_close_window(game->mlx);

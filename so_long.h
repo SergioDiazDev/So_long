@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 11:03:14 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:59:14 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@
 //struct
 typedef struct s_so_long
 {
-	int			width;
-	int			height;
-	char		**map;
-	mlx_t		*mlx;
-	mlx_image_t	*bg;
-	mlx_image_t	*mine;
-	mlx_image_t	*player;
+	int				width;
+	int				height;
+	char			**map;
+	mlx_t			*mlx;
+	mlx_image_t		*bg;
+	mlx_texture_t	*t_bg;
+	mlx_image_t		*mine;
+	mlx_texture_t	*t_mine;
+	mlx_image_t		*player;
+	mlx_texture_t	*t_player;
 
 }	t_so_long;
 //so_long_utils
