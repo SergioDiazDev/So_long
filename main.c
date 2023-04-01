@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 11:35:31 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 12:24:51 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,6 @@ int	main(int argc, char **argv)
 	ft_read_map(&game, argv[1]);
 	ft_init_so_long(&game);
 	ft_pain_map(&game);
-	mlx_image_to_window(game.mlx, game.coral, 0, 0);
-	mlx_image_to_window(game.mlx, game.coral, 64, 0);
-	mlx_image_to_window(game.mlx, game.coral, 128, 0);
-	mlx_image_to_window(game.mlx, game.coral, 0, 64);
-	mlx_image_to_window(game.mlx, game.coral, 192, 64);
-	mlx_image_to_window(game.mlx, game.coral, 128, 128);
-	mlx_image_to_window(game.mlx, game.mine, 64, 64);
-	mlx_image_to_window(game.mlx, game.sushi, 128, 64);
-	mlx_image_to_window(game.mlx, game.player, 0, 0);
 	mlx_key_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
 	ft_exit_free(FIN_DE_PROGRAMA, &game);
@@ -68,7 +59,6 @@ void	ft_read_map(t_so_long *g, char *name_map)
 			ft_exit_free(EXTENSION_NO_BER, g);
 		fd = open(name_map, O_RDONLY);
 		g->temp = get_next_line(fd);
-		g->height++;
 		size = ft_strlen(g->temp) - 1;
 		g->width = size;
 		while (g->temp)
@@ -79,15 +69,21 @@ void	ft_read_map(t_so_long *g, char *name_map)
 				ft_exit_free(MAPA_NO_CORRECTO, g);
 			g->height++;
 		}
-		if (--g->height == g->width || g->height <= 2 || g->width <= 2)
+		if (g->height == g->width || g->height <= 2 || g->width <= 2)
 			ft_exit_free(MAPA_NO_CORRECTO, g);
 		free(g->temp);
 		close(fd);
 		g->map = ft_calloc(sizeof(char *), g->height + 1);
 		fd = open(name_map, O_RDONLY);
 		size = 0;
-		while (size != g->height + 1)
+		//////////////////////////////////////////////////////////
+		while (size != g->height)
+		{
 			g->map[size++] = get_next_line(fd);
+			printf("\nmap[%d]=%s\n", size, g->map[size - 1]);
+		}
+		printf("\nH:%d//W:%d\n", g->height, g->width);
+		////////////////////////////////////////////////////////
 		close(fd);
 	}
 }
