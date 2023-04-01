@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 11:04:02 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 11:35:31 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,14 @@ int	main(int argc, char **argv)
 	ft_read_map(&game, argv[1]);
 	ft_init_so_long(&game);
 	ft_pain_map(&game);
-	mlx_image_to_window(game.mlx, game.mine, 0, 0);
+	mlx_image_to_window(game.mlx, game.coral, 0, 0);
+	mlx_image_to_window(game.mlx, game.coral, 64, 0);
+	mlx_image_to_window(game.mlx, game.coral, 128, 0);
+	mlx_image_to_window(game.mlx, game.coral, 0, 64);
+	mlx_image_to_window(game.mlx, game.coral, 192, 64);
+	mlx_image_to_window(game.mlx, game.coral, 128, 128);
+	mlx_image_to_window(game.mlx, game.mine, 64, 64);
+	mlx_image_to_window(game.mlx, game.sushi, 128, 64);
 	mlx_image_to_window(game.mlx, game.player, 0, 0);
 	mlx_key_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);

@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 17:17:36 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 11:24:09 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ typedef struct s_so_long
 	mlx_texture_t	*t_mine;
 	mlx_image_t		*player;
 	mlx_texture_t	*t_player;
+	mlx_image_t		*coral;
+	mlx_texture_t	*t_coral;
+	mlx_image_t		*sushi;
+	mlx_texture_t	*t_sushi;
 
 }	t_so_long;
 //so_long_utils
