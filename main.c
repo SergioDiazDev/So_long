@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 13:16:17 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:37:13 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		ft_exit_free(FIN_DE_PROGRAMA, game);
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		game->player->instances[0].y -= BLOCK;
+		game->player->instances[0].y -= SIZE;
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		game->player->instances[0].y += BLOCK;
+		game->player->instances[0].y += SIZE;
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		game->player->instances[0].x -= BLOCK;
+		game->player->instances[0].x -= SIZE;
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		game->player->instances[0].x += BLOCK;
+		game->player->instances[0].x += SIZE;
 }
 
 int	main(int argc, char **argv)
@@ -76,14 +76,6 @@ void	ft_read_map(t_so_long *g, char *name_map)
 		g->map = ft_calloc(sizeof(char *), g->height + 1);
 		fd = open(name_map, O_RDONLY);
 		size = 0;
-		//////////////////////////////////////////////////////////
-		while (size != g->height)
-		{
-			g->map[size++] = get_next_line(fd);
-			printf("\nmap[%d]=%s\n", size, g->map[size - 1]);
-		}
-		printf("\nH:%d//W:%d\n", g->height, g->width);
-		////////////////////////////////////////////////////////
 		close(fd);
 	}
 }

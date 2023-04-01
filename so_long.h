@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 13:13:16 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:35:49 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 //open
 # include <fcntl.h>
 //Defines
-# define BLOCK 64
+# define SIZE 64
 # define EXTENSION_NO_BER -1
 # define FIN_DE_PROGRAMA	-2
 # define MAPA_NO_CORRECTO -3
@@ -30,6 +30,8 @@ typedef struct s_so_long
 {
 	int				width;
 	int				height;
+	int				i;
+	int				pos[2];
 	char			**map;
 	char			*temp;
 	mlx_t			*mlx;

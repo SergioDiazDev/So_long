@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:10:33 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 13:12:48 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:34:37 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_init_so_long(t_so_long *g)
 {
-	g->mlx = mlx_init(g->width * BLOCK, g->height * BLOCK, "so_long", false);
+	g->mlx = mlx_init(g->width * SIZE, g->height * SIZE, "so_long", false);
 	if (!g->mlx)
 		exit(write(1, "\n[ERROR]: No se pudo crear MLX\n\n", 33));
 	g->t_bg = mlx_load_png("img/bg.png");

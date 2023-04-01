@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:12:53 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 12:57:10 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:36:34 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 void	ft_pain_map(t_so_long *g)
 {
-	int	i;
 	int	j;
 
-	i = 0;
-	while (i <= g->height - 1)
+	g->i = -1;
+	while (++g->i <= g->height - 1)
 	{
-		j = 0;
-		while (j <= g->width - 1)
+		j = -1;
+		while (++j <= g->width - 1)
 		{
-			mlx_image_to_window(g->mlx, g->bg, j * BLOCK, i * BLOCK);
-			if (g->map[i][j] == '1')
-				mlx_image_to_window(g->mlx, g->coral, j * BLOCK, i * BLOCK);
-			else if (g->map[i][j] == 'C')
-				mlx_image_to_window(g->mlx, g->sushi, j * BLOCK, i * BLOCK);
-			else if (g->map[i][j] == 'P')
-				mlx_image_to_window(g->mlx, g->player, j * BLOCK, i * BLOCK);
-			else if (g->map[i][j] == 'E')
-				mlx_image_to_window(g->mlx, g->mine, j * BLOCK, i * BLOCK);
-			else if (g->map[i][j] == 'S')
-				mlx_image_to_window(g->mlx, g->egg, j * BLOCK, i * BLOCK);
-			j++;
+			mlx_image_to_window(g->mlx, g->bg, j * SIZE, g->i * SIZE);
+			if (g->map[g->i][j] == '1')
+				mlx_image_to_window(g->mlx, g->coral, j * SIZE, g->i * SIZE);
+			else if (g->map[g->i][j] == 'C')
+				mlx_image_to_window(g->mlx, g->sushi, j * SIZE, g->i * SIZE);
+			else if (g->map[g->i][j] == 'P')
+			{
+				g->pos[0] = g->i;
+				g->pos[1] = j;
+			}
+			else if (g->map[g->i][j] == 'E')
+				mlx_image_to_window(g->mlx, g->mine, j * SIZE, g->i * SIZE);
+			else if (g->map[g->i][j] == 'S')
+				mlx_image_to_window(g->mlx, g->egg, j * SIZE, g->i * SIZE);
 		}
-		i++;
 	}
+	mlx_image_to_window(g->mlx, g->player, g->pos[0] * SIZE, g->pos[1] * SIZE);
 }
