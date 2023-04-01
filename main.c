@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 14:43:42 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:12:46 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void	ft_where_is(t_so_long *g)
 {
 	if (g->map[g->pos[1]][g->pos[0]] == 'X')
 		ft_exit_free(FIN_DE_PROGRAMA, g);
+	if (g->map[g->pos[1]][g->pos[0]] == 'C')
+	{
+		g->sushi->instances->enabled = 0;
+	}
 }
 
 void	ft_exit_free(int nb_error, t_so_long *game)
