@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 14:28:44 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:42:14 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_so_long
 {
 	int				width;
 	int				height;
+	int				count;
 	int				pos[2];
 	char			**map;
 	char			*temp;
@@ -55,6 +56,7 @@ int		ft_memcmp(char *str1, char *str2, int n);
 //main.c
 void	ft_pain_map(t_so_long *g);
 void	ft_exit_free(int nb_error, t_so_long *game);
+void	ft_where_is(t_so_long *g);
 void	ft_clean_image(t_so_long *game);
 void	ft_leaks(void);
 //init_so_long

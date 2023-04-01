@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 14:31:14 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:43:42 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 	t_so_long	*g;
 
 	g = (t_so_long *) param;
+	ft_where_is(g);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		ft_exit_free(FIN_DE_PROGRAMA, g);
 	if (g->pos[1] > 0)
@@ -25,6 +26,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y -= SIZE;
 			g->pos[1]--;
+			g->count++;
 		}
 	}
 	if (g->pos[1] < g->height - 1)
@@ -33,6 +35,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y += SIZE;
 			g->pos[1]++;
+			g->count++;
 		}
 	}
 	if (g->pos[0] > 0)
@@ -41,6 +44,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].x -= SIZE;
 			g->pos[0]--;
+			g->count++;
 		}
 	}
 	if (g->pos[0] < g->width - 1)
@@ -49,9 +53,9 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].x += SIZE;
 			g->pos[0]++;
+			g->count++;
 		}
 	}
-		printf("%d,%d\n", g->pos[0],g->pos[1]);
 }
 
 int	main(int argc, char **argv)
@@ -63,6 +67,7 @@ int	main(int argc, char **argv)
 		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
 	game.height = 0;
 	game.width = 0;
+	game.count = 0;
 	ft_read_map(&game, argv[1]);
 	ft_init_so_long(&game);
 	ft_pain_map(&game);
@@ -70,6 +75,12 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	ft_exit_free(FIN_DE_PROGRAMA, &game);
 	return (EXIT_SUCCESS);
+}
+
+void	ft_where_is(t_so_long *g)
+{
+	if (g->map[g->pos[1]][g->pos[0]] == 'X')
+		ft_exit_free(FIN_DE_PROGRAMA, g);
 }
 
 void	ft_exit_free(int nb_error, t_so_long *game)
