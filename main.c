@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 12:24:51 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:16:17 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,17 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		mlx_delete_texture(game->t_bg);
 		mlx_delete_texture(game->t_mine);
 		mlx_delete_texture(game->t_player);
+		mlx_delete_texture(game->t_coral);
+		mlx_delete_texture(game->t_egg);
+		mlx_delete_texture(game->t_rocket);
+		mlx_delete_texture(game->t_sushi);
 		mlx_delete_image(game->mlx, game->bg);
 		mlx_delete_image(game->mlx, game->mine);
 		mlx_delete_image(game->mlx, game->player);
+		mlx_delete_image(game->mlx, game->coral);
+		mlx_delete_image(game->mlx, game->egg);
+		mlx_delete_image(game->mlx, game->rocket);
+		mlx_delete_image(game->mlx, game->sushi);
 		mlx_close_window(game->mlx);
 		mlx_terminate(game->mlx);
 		exit(write(1, "\n[FIN_DE_PROGRAMA]\n\n", 21));

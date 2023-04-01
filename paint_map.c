@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:12:53 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 12:41:14 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 12:57:10 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_pain_map(t_so_long *g)
 			else if (g->map[i][j] == 'E')
 				mlx_image_to_window(g->mlx, g->mine, j * BLOCK, i * BLOCK);
 			else if (g->map[i][j] == 'S')
-				mlx_image_to_window(g->mlx, g->player, j * BLOCK, i * BLOCK);
+				mlx_image_to_window(g->mlx, g->egg, j * BLOCK, i * BLOCK);
 			j++;
 		}
 		i++;
