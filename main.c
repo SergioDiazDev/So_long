@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/03/31 17:23:28 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 11:04:02 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_read_map(t_so_long *g, char *name_map)
 				ft_exit_free(MAPA_NO_CORRECTO, g);
 			g->height++;
 		}
-		if (g->height == g->width || g->height <= 2 || g->width <= 2)
+		if (--g->height == g->width || g->height <= 2 || g->width <= 2)
 			ft_exit_free(MAPA_NO_CORRECTO, g);
 		free(g->temp);
 		close(fd);
@@ -91,9 +91,8 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
 	if (nb_error == FIN_DE_PROGRAMA)
 	{
-		//NO ESTOY LIBERANDO ESTO, PERO NO DA PROBLEMAS
-		// while (game->height)
-		// 	free(game->map[game->height]);
+		while (--game->height)
+			free(game->map[game->height]);
 		mlx_delete_texture(game->t_bg);
 		mlx_delete_texture(game->t_mine);
 		mlx_delete_texture(game->t_player);
@@ -105,7 +104,10 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		exit(write(1, "\n[FIN_DE_PROGRAMA]\n\n", 21));
 	}
 	if (nb_error == MAPA_NO_CORRECTO)
+	{
+		printf("\nH:%d\nW:%d\nT:%d\n", game->height, game->width, ft_strlen(game->temp));
 		exit(write(1, "\n[ERROR]Mapa no correcto.\n\n", 28));
+	}
 }
 
 void	ft_leaks(void)
