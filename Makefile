@@ -6,7 +6,7 @@
 #    By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/30 15:19:51 by sdiaz-ru          #+#    #+#              #
-#    Updated: 2023/04/01 13:58:08 by sdiaz-ru         ###   ########.fr        #
+#    Updated: 2023/04/01 20:06:03 by sdiaz-ru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INCLUDE			=	so_long.h Get_Next_Line/get_next_line.h
 DIR_MAKE_MLX	=	./MLX42
 SRC				=	main.c so_long_utils.c Get_Next_Line/get_next_line.c	\
 					Get_Next_Line/get_next_line_utils.c init_so_long.c		\
-					paint_map.c read_map.c
+					paint_map.c read_map.c correct_map.c
 
 all: $(NAME)
 

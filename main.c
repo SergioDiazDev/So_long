@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 15:12:46 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:06:29 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(int argc, char **argv)
 	game.width = 0;
 	game.count = 0;
 	ft_read_map(&game, argv[1]);
+	ft_correct_map(&game);
 	ft_init_so_long(&game);
 	ft_pain_map(&game);
 	mlx_key_hook(game.mlx, ft_hook, &game);

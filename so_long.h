@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 15:12:31 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:07:24 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 //Defines
 # define SIZE 64
+//REVISAR CONTROL DE ERRORES
 # define EXTENSION_NO_BER -1
 # define FIN_DE_PROGRAMA	-2
 # define MAPA_NO_CORRECTO -3
@@ -64,4 +65,7 @@ void	ft_init_so_long(t_so_long *game);
 //read_map
 void	ft_read_map(t_so_long *game, char *name_map);
 void	ft_read_map2(t_so_long *g, char *name_map);
+//correct_map
+void    ft_correct_map(t_so_long *g);
+int		all_is_one(char *str);
 #endif
