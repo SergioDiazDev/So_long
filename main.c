@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/02 13:41:31 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:05:41 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y -= SIZE;
 			g->pos[1]--;
-			g->count++;
+			g->steps++;
+			mlx_put_string(game.mlx, game.steps, 0, 0);
 		}
 	}
 	if (g->map[g->pos[1] + 1][g->pos[0]] != '1')
@@ -35,7 +36,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y += SIZE;
 			g->pos[1]++;
-			g->count++;
+			g->steps++;
+			mlx_put_string(game.mlx, game.steps, 0, 0);
 		}
 	}
 	if (g->map[g->pos[1]][g->pos[0] - 1] != '1')
@@ -44,7 +46,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].x -= SIZE;
 			g->pos[0]--;
-			g->count++;
+			g->steps++;
+			mlx_put_string(game.mlx, game.steps, 0, 0);
 		}
 	}
 	if (g->map[g->pos[1]][g->pos[0] + 1] != '1')
@@ -53,7 +56,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].x += SIZE;
 			g->pos[0]++;
-			g->count++;
+			g->steps++;
+			mlx_put_string(game.mlx, game.steps, 0, 0);
 		}
 	}
 }
@@ -67,7 +71,7 @@ int	main(int argc, char **argv)
 		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
 	game.height = 0;
 	game.width = 0;
-	game.count = 0;
+	game.steps = 0;
 	ft_read_map(&game, argv[1]);
 	ft_correct_map(&game);
 	ft_init_so_long(&game);
