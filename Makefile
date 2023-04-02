@@ -6,7 +6,7 @@
 #    By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/30 15:19:51 by sdiaz-ru          #+#    #+#              #
-#    Updated: 2023/04/01 20:06:03 by sdiaz-ru         ###   ########.fr        #
+#    Updated: 2023/04/02 16:24:32 by sdiaz-ru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ make_mlx:
 			@$(MAKE) -C $(DIR_MAKE_MLX)
 
 $(NAME):	make_mlx
-			@gcc $(CFLAGS) $(SRC) -o $(NAME) $(DIR_MAKE_MLX)/libmlx42.a
+			@gcc $(SRC) -o $(NAME) $(DIR_MAKE_MLX)/libmlx42.a $(CFLAGS)
 			@echo So_long compilado
 
 re:		fclean all
