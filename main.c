@@ -20,7 +20,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 	ft_where_is(g);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		ft_exit_free(FIN_DE_PROGRAMA, g);
-	if (g->map[g->pos[1] - 1][pos[0]] != '1')
+	if (g->map[g->pos[1] - 1][g->pos[0]] != '1')
 	{
 		if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 		{
@@ -29,7 +29,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->count++;
 		}
 	}
-	if (g->map[g->pos[1] + 1][pos[0]] != '1')
+	if (g->map[g->pos[1] + 1][g->pos[0]] != '1')
 	{
 		if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 		{
@@ -38,7 +38,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->count++;
 		}
 	}
-	if (g->map[g->pos[1]][pos[0] - 1] != '1')
+	if (g->map[g->pos[1]][g->pos[0] - 1] != '1')
 	{	
 		if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 		{
@@ -47,7 +47,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->count++;
 		}
 	}
-	if (g->map[g->pos[0]][pos[1] + 1] != '1')
+	if (g->map[g->pos[1]][g->pos[0] + 1] != '1')
 	{
 		if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		{

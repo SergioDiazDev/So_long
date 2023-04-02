@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME			=	so_long
-CFLAGS			=	-Wall -Werror -Wextra -DEBUG=1 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+CFLAGS			=	-Wall -Werror -ldl -Wextra -DEBUG=1 -Iinclude -lglfw -L"usr/lib/x86_64-linux-gnu/"
 RM				=	rm -fr
 INCLUDE			=	so_long.h Get_Next_Line/get_next_line.h
 DIR_MAKE_MLX	=	./MLX42
