@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/01 20:07:24 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:05:48 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_so_long
 {
 	int				width;
 	int				height;
-	int				count;
+	int				steps;
+	int				n_colect;
 	int				pos[2];
 	char			**map;
 	char			*temp;
