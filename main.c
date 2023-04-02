@@ -26,8 +26,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y -= SIZE;
 			g->pos[1]--;
-			g->steps++;
-			mlx_put_string(game.mlx, game.steps, 0, 0);
+			mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
+			
 		}
 	}
 	if (g->map[g->pos[1] + 1][g->pos[0]] != '1')
@@ -36,8 +36,8 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y += SIZE;
 			g->pos[1]++;
-			g->steps++;
-			mlx_put_string(game.mlx, game.steps, 0, 0);
+			mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
+			
 		}
 	}
 	if (g->map[g->pos[1]][g->pos[0] - 1] != '1')
@@ -47,7 +47,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->player->instances[0].x -= SIZE;
 			g->pos[0]--;
 			g->steps++;
-			mlx_put_string(game.mlx, game.steps, 0, 0);
+			mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
 		}
 	}
 	if (g->map[g->pos[1]][g->pos[0] + 1] != '1')
@@ -57,7 +57,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->player->instances[0].x += SIZE;
 			g->pos[0]++;
 			g->steps++;
-			mlx_put_string(game.mlx, game.steps, 0, 0);
+			mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
 		}
 	}
 }
