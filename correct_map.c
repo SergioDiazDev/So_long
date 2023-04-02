@@ -16,12 +16,12 @@ void    ft_correct_map(t_so_long *g)
 {
     int i;
 
-    if (all_is_one(g->map[g->height]) || all_is_one(g->map[0]))
+    if (all_is_one(g->map[g->height - 1]) || all_is_one(g->map[0]))
         ft_exit_free(MAPA_NO_CORRECTO, g);
     i = 0;
     while (++i < g->height)
     {
-        if (g->map[i][0] != '1' || g->map[i][g->width] != '1')
+        if (g->map[i][0] != '1' || g->map[i][g->width - 1] != '1')
             ft_exit_free(MAPA_NO_CORRECTO, g);
     }
 }
