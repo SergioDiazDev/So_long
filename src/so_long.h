@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 15:58:34 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:00:19 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "Get_Next_Line/get_next_line.h"
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../Get_Next_Line/get_next_line.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 //open
 # include <fcntl.h>
 //Defines
-# define SIZE 64
+# define S 64
 //REVISAR CONTROL DE ERRORES
 # define EXTENSION_NO_BER -1
 # define FIN_DE_PROGRAMA	-2
@@ -29,13 +29,14 @@
 //struct
 typedef struct s_so_long
 {
-	int				width;
-	int				height;
+	int				w;
+	int				h;
 	int				steps;
 	int				pos[2];
 	char			**map;
 	char			*temp;
 	mlx_t			*mlx;
+	mlx_image_t		*str;
 	mlx_image_t		*bg;
 	mlx_texture_t	*t_bg;
 	mlx_image_t		*egg;
@@ -59,11 +60,15 @@ char	*ft_itoa(long n);
 //paint_map
 void	ft_pain_map(t_so_long *g);
 void	ft_pain_colect(t_so_long *g);
+void	ft_open_exit(t_so_long *g);
 //main.c
 void	ft_exit_free(int nb_error, t_so_long *game);
 void	ft_where_is(t_so_long *g);
 void	ft_clean_image(t_so_long *game);
 void	ft_leaks(void);
+//hooks.c
+void	ft_hook(mlx_key_data_t keydata, void *param);
+void	ft_hook_2(mlx_key_data_t keydata, t_so_long *g);
 //init_so_long
 void	ft_init_so_long(t_so_long *game);
 //read_map

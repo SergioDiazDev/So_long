@@ -6,80 +6,31 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 16:26:55 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:48:14 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_hook(mlx_key_data_t keydata, void *param)
-{
-	t_so_long			*g;
-	static mlx_image_t	*img = NULL;
-
-	g = (t_so_long *) param;
-	ft_where_is(g);
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		ft_exit_free(FIN_DE_PROGRAMA, g);
-	if (g->map[g->pos[1] - 1][g->pos[0]] != '1')
-	{
-		if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		{
-			g->player->instances[0].y -= SIZE;
-			g->pos[1]--;
-			g->steps++;
-		}
-	}
-	if (g->map[g->pos[1] + 1][g->pos[0]] != '1')
-	{
-		if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		{
-			g->player->instances[0].y += SIZE;
-			g->pos[1]++;
-			g->steps++;
-		}
-	}
-	if (g->map[g->pos[1]][g->pos[0] - 1] != '1')
-	{	
-		if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		{
-			g->player->instances[0].x -= SIZE;
-			g->pos[0]--;
-			g->steps++;
-		}
-	}
-	if (g->map[g->pos[1]][g->pos[0] + 1] != '1')
-	{
-		if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		{
-			g->player->instances[0].x += SIZE;
-			g->pos[0]++;
-			g->steps++;
-		}
-	}
-	mlx_delete_image(g->mlx, img);
-	g->temp = ft_itoa(g->steps);
-	img = mlx_put_string(g->mlx, g->temp, g->width * SIZE - 32, g->height * SIZE - 20);
-	free(g->temp);
-}
-
 int	main(int argc, char **argv)
 {
-	t_so_long	game;
+	t_so_long	g;
 
 	atexit(ft_leaks);
 	if (argc != 2)
 		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
-	game.height = 0;
-	game.width = 0;
-	game.steps = 0;
-	ft_read_map(&game, argv[1]);
-	ft_correct_map(&game);
-	ft_init_so_long(&game);
-	ft_pain_map(&game);
-	mlx_key_hook(game.mlx, ft_hook, &game);
-	mlx_loop(game.mlx);
-	ft_exit_free(FIN_DE_PROGRAMA, &game);
+	g.h = 0;
+	g.w = 0;
+	g.steps = 0;
+	ft_read_map(&g, argv[1]);
+	ft_correct_map(&g);
+	ft_init_so_long(&g);
+	ft_pain_map(&g);
+	mlx_image_to_window(g.mlx, g.player, g.pos[0] * S, g.pos[1] * S);
+	g.map[g.pos[0]][g.pos[1]] = 0;
+	mlx_key_hook(g.mlx, ft_hook, &g);
+	mlx_loop(g.mlx);
+	ft_exit_free(FIN_DE_PROGRAMA, &g);
 	return (EXIT_SUCCESS);
 }
 
@@ -105,18 +56,15 @@ void	ft_exit_free(int nb_error, t_so_long *game)
 		exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
 	if (nb_error == FIN_DE_PROGRAMA)
 	{
-		while (--game->height)
-			free(game->map[game->height]);
+		while (--game->h)
+			free(game->map[game->h]);
 		ft_clean_image(game);
 		mlx_close_window(game->mlx);
 		mlx_terminate(game->mlx);
 		exit(write(1, "\n[FIN_DE_PROGRAMA]\n\n", 21));
 	}
 	if (nb_error == MAPA_NO_CORRECTO)
-	{
-		printf("\nH:%d\nW:%d\nT:%d\n", game->height, game->width, ft_strlen(game->temp));
 		exit(write(1, "\n[ERROR]Mapa no correcto.\n\n", 28));
-	}
 }
 
 void	ft_clean_image(t_so_long *game)
