@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 18:00:19 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:49:31 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	ft_read_map2(t_so_long *g, char *name_map);
 //correct_map
 void	ft_correct_map(t_so_long *g);
 int		all_is_one(char *str);
+void	ft_map_solve(char **map, int i, int j, t_so_long *g);
 #endif

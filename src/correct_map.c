@@ -38,3 +38,33 @@ int	all_is_one(char *str)
 	}
 	return (1);
 }
+
+void	ft_map_solve(char **map, int i, int j, t_so_long *g)
+{
+	int	y;
+	int	x;
+
+	if (i < g->h && j < g->w)
+	{
+		map[i][j] = '2';
+		if (map[i + 1][j] != '1' || map[i + 1][j] != 'X')
+			ft_map_solve(map, ++i, j, g);
+		if (map[i - 1][j] != '1' || map[i - 1][j] != 'X')
+			ft_map_solve(map, --i, j, g);
+		if (map[i][j + 1] != '1' || map[i][j + 1] != 'X')
+			ft_map_solve(map, i, ++j, g);
+		if (map[i][j - 1] != '1' || map[i][j - 1] != 'X')
+			ft_map_solve(map, i, --j, g);
+		y = -1;
+		while (++y <= g->h - 1)
+		{
+			x = -1;
+			while (++x <= g->w - 1)
+			{
+				printf("%d", map[y][x]);
+			}
+			printf("/n");
+		}
+	}
+	printf("hola%d", g->h);
+}
