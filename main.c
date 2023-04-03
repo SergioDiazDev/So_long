@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 12:49:30 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:43:49 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 	}
 	mlx_delete_image(g->mlx, img);
 	g->temp = ft_itoa(g->steps);
-	img = mlx_put_string(g->mlx, g->temp, g->height, g->width);
+	img = mlx_put_string(g->mlx, g->temp, g->width * SIZE - 32 , (g->height) * SIZE - 20);
 	free(g->temp);
 }
 
