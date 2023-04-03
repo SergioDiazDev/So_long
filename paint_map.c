@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:12:53 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 16:17:06 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:26:39 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	ft_pain_colect(t_so_long *g)
 {
 	int	i;
 	int	j;
+	int	count;
 
+	count = 0;
 	i = -1;
 	mlx_delete_image(g->mlx, g->sushi);
 	g->sushi = mlx_texture_to_image(g->mlx, g->t_sushi);
@@ -58,6 +60,7 @@ void	ft_pain_colect(t_so_long *g)
 		{
 			if (g->map[i][j] == 'C')
 			{
+				count++;
 				mlx_image_to_window(g->mlx, g->sushi, j * SIZE, i * SIZE);
 			}
 		}
@@ -65,4 +68,20 @@ void	ft_pain_colect(t_so_long *g)
 	mlx_delete_image(g->mlx, g->player);
 	g->player = mlx_texture_to_image(g->mlx, g->t_player);
 	mlx_image_to_window(g->mlx, g->player, g->pos[0] * SIZE, g->pos[1] * SIZE);
+	if (!count)
+	{
+		mlx_delete_image(g->mlx, g->egg);
+		g->rocket = mlx_texture_to_image(g->mlx, g->t_rocket);
+		i = -1;
+		while (++i <= g->height - 1)
+		{
+			j = -1;
+			while (++j <= g->width - 1)
+			{
+				if (g->map[i][j] == 'E')
+					mlx_image_to_window(g->mlx, g->rocket, j * SIZE, i * SIZE);
+					g->egg = NULL;
+			}
+		}
+	}
 }

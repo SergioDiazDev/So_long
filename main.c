@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 16:16:00 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:26:55 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	ft_where_is(t_so_long *g)
 		g->map[g->pos[1]][g->pos[0]] = 'P';
 		ft_pain_colect(g);
 	}
+	if (g->map[g->pos[1]][g->pos[0]] == 'E' && !g->egg)
+		ft_exit_free(FIN_DE_PROGRAMA, g);
 }
 
 void	ft_exit_free(int nb_error, t_so_long *game)
