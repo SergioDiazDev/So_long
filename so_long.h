@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/02 18:14:53 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:58:34 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_so_long
 	int				width;
 	int				height;
 	int				steps;
-	int				n_colect;
 	int				pos[2];
 	char			**map;
 	char			*temp;
@@ -57,8 +56,10 @@ typedef struct s_so_long
 int		ft_memcmp(char *str1, char *str2, int n);
 char	*ft_loadstr(long n, long size);
 char	*ft_itoa(long n);
-//main.c
+//paint_map
 void	ft_pain_map(t_so_long *g);
+void	ft_pain_colect(t_so_long *g);
+//main.c
 void	ft_exit_free(int nb_error, t_so_long *game);
 void	ft_where_is(t_so_long *g);
 void	ft_clean_image(t_so_long *game);
@@ -69,6 +70,6 @@ void	ft_init_so_long(t_so_long *game);
 void	ft_read_map(t_so_long *game, char *name_map);
 void	ft_read_map2(t_so_long *g, char *name_map);
 //correct_map
-void    ft_correct_map(t_so_long *g);
+void	ft_correct_map(t_so_long *g);
 int		all_is_one(char *str);
 #endif
