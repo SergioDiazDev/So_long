@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/03 00:12:42 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:49:30 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	ft_hook(mlx_key_data_t keydata, void *param)
 {
-	t_so_long	*g;
-	mlx_image_t	*img;
-	
-	img = NULL;
+	t_so_long			*g;
+	static mlx_image_t	*img = NULL;
+
 	g = (t_so_long *) param;
 	ft_where_is(g);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
@@ -28,10 +27,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y -= SIZE;
 			g->pos[1]--;
-			if (img)
-				mlx_delete_image(g->mlx, img);
-			img = mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
-			
+			g->steps++;
 		}
 	}
 	if (g->map[g->pos[1] + 1][g->pos[0]] != '1')
@@ -40,10 +36,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		{
 			g->player->instances[0].y += SIZE;
 			g->pos[1]++;
-			if (img)
-				mlx_delete_image(g->mlx, img);
-			mlx_put_string(g->mlx, ft_itoa(g->steps), g->height, g->width);
-			
+			g->steps++;
 		}
 	}
 	if (g->map[g->pos[1]][g->pos[0] - 1] != '1')
@@ -53,9 +46,6 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->player->instances[0].x -= SIZE;
 			g->pos[0]--;
 			g->steps++;
-			if (img)
-				mlx_delete_image(g->mlx, img);
-			mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
 		}
 	}
 	if (g->map[g->pos[1]][g->pos[0] + 1] != '1')
@@ -65,11 +55,12 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 			g->player->instances[0].x += SIZE;
 			g->pos[0]++;
 			g->steps++;
-			if (img)
-				mlx_delete_image(g->mlx, img);
-			mlx_put_string(g->mlx, ft_itoa(g->steps), 0, 0);
 		}
 	}
+	mlx_delete_image(g->mlx, img);
+	g->temp = ft_itoa(g->steps);
+	img = mlx_put_string(g->mlx, g->temp, g->height, g->width);
+	free(g->temp);
 }
 
 int	main(int argc, char **argv)
