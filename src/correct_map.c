@@ -56,11 +56,7 @@ void	ft_map_solve1(t_so_long *g)
 {
 	int	i;
 	int	j;
-	int	count_p;
-	int	count_e;
-
-	count_p = 0;
-	count_e = 0;
+	
 	i = -1;
 	while (++i <= g->h - 1)
 	{

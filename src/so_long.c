@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 17:01:35 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:39:22 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int	main(int argc, char **argv)
 
 void	ft_where_is(t_so_long *g)
 {
-	int	i;
-
-	i = 0;
 	if (g->map[g->pos[1]][g->pos[0]] == 'X')
 		ft_exit_free(FIN_DE_PROGRAMA, g);
 	if (g->map[g->pos[1]][g->pos[0]] == 'C')
