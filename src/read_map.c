@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 13:56:57 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 14:34:41 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:23:06 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_read_map(t_so_long *g, char *name_map)
 	while (size != g->h)
 		g->map[size++] = get_next_line(fd);
 	close(fd);
+	ft_min_map(g);
 }
 
 void	ft_read_map2(t_so_long *g, char *name_map)
