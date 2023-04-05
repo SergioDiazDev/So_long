@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 13:56:57 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 14:00:49 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:34:41 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,34 @@ void	ft_read_map2(t_so_long *g, char *name_map)
 	free(g->temp);
 	close(fd);
 	if (g->h == g->w || g->h <= 2 || g->w <= 2)
+		ft_exit_free(MAPA_NO_CORRECTO, g);
+}
+
+void	ft_min_map(t_so_long *g)
+{
+	int	i;
+	int	j;
+	int	count_p;
+	int	count_e;
+	int	count_c;
+
+	count_p = 0;
+	count_e = 0;
+	count_c = 0;
+	i = -1;
+	while (++i <= g->h - 1)
+	{
+		j = -1;
+		while (++j <= g->w - 1)
+		{
+			if (g->map[i][j] == 'P')
+				count_p++;
+			if (g->map[i][j] == 'E')
+				count_e++;
+			if (g->map[i][j] == 'C')
+				count_c++;
+		}
+	}
+	if (count_e != 1 || count_p != 1 || count_c < 1)
 		ft_exit_free(MAPA_NO_CORRECTO, g);
 }

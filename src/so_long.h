@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 13:39:48 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:34:30 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_init_so_long(t_so_long *game);
 //read_map
 void	ft_read_map(t_so_long *game, char *name_map);
 void	ft_read_map2(t_so_long *g, char *name_map);
+void	ft_min_map(t_so_long *g);
 //correct_map
 void	ft_correct_map(t_so_long *g);
 int		all_is_one(char *str);
