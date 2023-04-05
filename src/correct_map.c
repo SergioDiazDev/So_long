@@ -39,32 +39,36 @@ int	all_is_one(char *str)
 	return (1);
 }
 
-void	ft_map_solve(char **map, int i, int j, t_so_long *g)
+void	ft_map_solve(char **map, int i, int j)
 {
-	int	y;
-	int	x;
+	map[i][j] = '2';
+	if (map[i + 1][j] == '0' || map[i + 1][j] == 'C' || map[i + 1][j] == 'E')
+		ft_map_solve(map, i + 1, j);
+	if (map[i - 1][j] == '0' || map[i - 1][j] == 'C' || map[i - 1][j] == 'E')
+		ft_map_solve(map, i - 1, j);
+	if (map[i][j + 1] == '0' || map[i][j + 1] == 'C' || map[i][j + 1] == 'E')
+		ft_map_solve(map, i, j + 1);
+	if (map[i][j - 1] == '0' || map[i][j - 1] == 'C' || map[i][j - 1] == 'E')
+		ft_map_solve(map, i, j - 1);
+}
 
-	if (i < g->h && j < g->w)
+void	ft_map_solve1(t_so_long *g)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i <= g->h - 1)
 	{
-		map[i][j] = '2';
-		if (map[i + 1][j] != '1' || map[i + 1][j] != 'X')
-			ft_map_solve(map, ++i, j, g);
-		if (map[i - 1][j] != '1' || map[i - 1][j] != 'X')
-			ft_map_solve(map, --i, j, g);
-		if (map[i][j + 1] != '1' || map[i][j + 1] != 'X')
-			ft_map_solve(map, i, ++j, g);
-		if (map[i][j - 1] != '1' || map[i][j - 1] != 'X')
-			ft_map_solve(map, i, --j, g);
-		y = -1;
-		while (++y <= g->h - 1)
+		j = -1;
+		while (++j <= g->w - 1)
 		{
-			x = -1;
-			while (++x <= g->w - 1)
-			{
-				printf("%d", map[y][x]);
-			}
-			printf("/n");
+			if (g->map[i][j] == 'E' || g->map[i][j] == 'C')
+				ft_exit_free(MAPA_NO_CORRECTO, g);
 		}
 	}
-	printf("hola%d", g->h);
+	while (--g->h)
+		free(g->map[g->h]);
+	free(g->map[g->h]);
+	free(g->map);
 }
