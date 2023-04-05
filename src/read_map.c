@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 13:56:57 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 16:23:06 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:59:49 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,10 @@ void	ft_min_map(t_so_long *g)
 {
 	int	i;
 	int	j;
-	int	count_p;
-	int	count_e;
-	int	count_c;
 
-	count_p = 0;
-	count_e = 0;
-	count_c = 0;
+	g->count_p = 0;
+	g->count_e = 0;
+	g->count_c = 0;
 	i = -1;
 	while (++i <= g->h - 1)
 	{
@@ -71,13 +68,16 @@ void	ft_min_map(t_so_long *g)
 		while (++j <= g->w - 1)
 		{
 			if (g->map[i][j] == 'P')
-				count_p++;
-			if (g->map[i][j] == 'E')
-				count_e++;
-			if (g->map[i][j] == 'C')
-				count_c++;
+				g->count_p++;
+			else if (g->map[i][j] == 'E')
+				g->count_e++;
+			else if (g->map[i][j] == 'C')
+				g->count_c++;
+			else if (g->map[i][j] != 'X' && g->map[i][j] != '1'
+			&& g->map[i][j] != '0')
+				ft_exit_free(MAPA_NO_CORRECTO, g);
 		}
 	}
-	if (count_e != 1 || count_p != 1 || count_c < 1)
+	if (g->count_e != 1 || g->count_p != 1 || g->count_c < 1)
 		ft_exit_free(MAPA_NO_CORRECTO, g);
 }

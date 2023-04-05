@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:51:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 14:34:30 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:59:09 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_so_long
 	int				h;
 	int				steps;
 	int				pos[2];
+	int				count_p;
+	int				count_e;
+	int				count_c;
 	char			**map;
 	char			*temp;
 	mlx_t			*mlx;

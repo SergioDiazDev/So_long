@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:54:17 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/04/05 16:21:41 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:01:35 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_so_long	g;
 
-	atexit(ft_leaks);
 	if (argc != 2)
 		return (write(1, "\n[ERROR]: Numero de argumentos no valido.\n\n", 43), 0);
 	g.h = 0;
@@ -26,11 +25,10 @@ int	main(int argc, char **argv)
 	ft_correct_map(&g);
 	ft_init_so_long(&g);
 	ft_pain_map(&g);
-	ft_map_solve(g.map, g.pos[0], g.pos[1]);
+	ft_map_solve(g.map, g.pos[1], g.pos[0]);
 	ft_map_solve1(&g);
 	ft_read_map(&g, argv[1]);
 	mlx_image_to_window(g.mlx, g.player, g.pos[0] * S, g.pos[1] * S);
-	//g.map[g.pos[0]][g.pos[1]] = 0;
 	mlx_key_hook(g.mlx, ft_hook, &g);
 	mlx_loop(g.mlx);
 	ft_exit_free(FIN_DE_PROGRAMA, &g);
