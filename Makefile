@@ -6,18 +6,20 @@
 #    By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/30 15:19:51 by sdiaz-ru          #+#    #+#              #
-#    Updated: 2023/04/06 00:03:24 by sdiaz-ru         ###   ########.fr        #
+#    Updated: 2023/05/05 13:51:30 by sdiaz-ru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	so_long
 ifeq ($(shell uname), Darwin)
-	CFLAGS			=	-Wall -Werror -Wextra -DEBUG=1 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+	CFLAGS			=	-Wall -Werror -Wextra
+	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+	
 else
-	CFLAGS			=	-Wall -Werror -ldl -Wextra -DEBUG=1 -Iinclude -lglfw -L"usr/lib/x86_64-linux-gnu/"
+	CFLAGS			=	-Wall -Werror -ldl -Wextra
+	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"usr/lib/x86_64-linux-gnu/"
 endif
 RM				=	rm -fr
-INCLUDE			=	so_long.h Get_Next_Line/get_next_line.h
 DIR_MAKE_MLX	=	./MLX42
 DIR_SRC			=	./src/
 DIR_GNL			=	./Get_Next_Line/
@@ -33,7 +35,7 @@ make_mlx:
 			@$(MAKE) -C $(DIR_MAKE_MLX)
 
 $(NAME):	$(OBJ)
-			@gcc $(SRC) -o $(NAME) $(DIR_MAKE_MLX)/libmlx42.a $(CFLAGS)
+			@gcc $(CFLAGS) $(SRC) -o $(NAME) $(DIR_MAKE_MLX)/libmlx42.a $(INCLUDE)
 			@echo So_long compilado
 
 re:		fclean all
