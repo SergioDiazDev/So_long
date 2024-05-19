@@ -16,8 +16,8 @@ ifeq ($(shell uname), Darwin)
 	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 	
 else
-	CFLAGS			=	-Wall -Werror -ldl -Wextra
-	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -L"usr/lib/x86_64-linux-gnu/"
+	CFLAGS			=	-Wall -Werror -Wextra
+	INCLUDE			=	-DEBUG=1 -Iinclude -lglfw -ldl -L"usr/lib/x86_64-linux-gnu/"
 endif
 RM				=	rm -fr
 DIR_MAKE_MLX	=	./MLX42
